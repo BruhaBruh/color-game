@@ -1,8 +1,8 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { fadeIn } from "react-animations";
 import styled, { keyframes } from "styled-components";
 import { useAppDispatch, useAppSelector } from "../../hooks/redux";
-import { ColorName, colors, showed } from "../../lib/store/game";
+import { ColorName, colors, showed, sounds } from "../../lib/store/game";
 
 const fadeInAnimation = keyframes`${fadeIn}`;
 
@@ -28,12 +28,11 @@ const GameShow = () => {
   const isShowing = useAppSelector((state) => state.game.isShowing);
   const gameColors = useAppSelector((state) => state.game.colors);
   const timeBetweenShow = useAppSelector((state) => state.game.timeBetweenShow);
-  const [transitionState, setTransitionState] = useState(false);
 
   const [currentColors, setCurrentColors] = useState<ColorName[]>([]);
-  const currentColor = useMemo(() => {
-    return currentColors[0];
-  }, [currentColors]);
+  const [currentColor, setCurrentColor] = useState<ColorName | undefined>(
+    undefined
+  );
 
   let timeout: number;
 
@@ -48,6 +47,14 @@ const GameShow = () => {
   };
 
   useEffect(() => {
+    const newCurrent = currentColors[0];
+    setCurrentColor(newCurrent);
+
+    if (!newCurrent) return;
+    sounds[newCurrent].play();
+  }, [currentColors]);
+
+  useEffect(() => {
     if (!(currentColors.length === 0 && isStart)) return;
     dispatch(showed(undefined));
     setIsStart(false);
@@ -59,17 +66,15 @@ const GameShow = () => {
   useEffect(() => {
     if (!isShowing) return;
     clearTimeout(timeout);
-    setCurrentColors(gameColors);
-    setIsStart(true);
-    timeout = setTimeout(removeFirstColor, timeBetweenShow);
+    timeout = setTimeout(() => {
+      setCurrentColors(gameColors);
+      setIsStart(true);
+      timeout = setTimeout(removeFirstColor, timeBetweenShow);
+    }, 500);
     return () => {
       clearTimeout(timeout);
     };
   }, [isShowing, gameColors, timeBetweenShow]);
-
-  useEffect(() => {
-    setTransitionState((p) => !p);
-  }, [currentColor]);
 
   return isShowing && currentColor ? (
     <ColorPlate

@@ -1,4 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { Howl, HowlOptions } from "howler";
+import hitHurt from "../../../sounds/hitHurt.wav";
+import sound0 from "../../../sounds/tone (0).wav";
+import sound1 from "../../../sounds/tone (1).wav";
+import sound2 from "../../../sounds/tone (2).wav";
+import sound3 from "../../../sounds/tone (3).wav";
+import sound4 from "../../../sounds/tone (4).wav";
+import sound5 from "../../../sounds/tone (5).wav";
+import sound6 from "../../../sounds/tone (6).wav";
+import sound7 from "../../../sounds/tone (7).wav";
+import sound8 from "../../../sounds/tone (8).wav";
+import sound9 from "../../../sounds/tone (9).wav";
 
 export type GameState = {
   isStarted: boolean;
@@ -46,6 +58,29 @@ export const colors: Record<ColorName, string> = {
   black: "#171717",
 };
 
+const getSoundOptions = (sound: string): HowlOptions => {
+  return {
+    src: [sound],
+    autoplay: false,
+    loop: false,
+    volume: 0.35,
+  };
+};
+
+export const hitSound = new Howl(getSoundOptions(hitHurt));
+export const sounds: Record<ColorName, Howl> = {
+  red: new Howl(getSoundOptions(sound0)),
+  blue: new Howl(getSoundOptions(sound1)),
+  yellow: new Howl(getSoundOptions(sound2)),
+  green: new Howl(getSoundOptions(sound3)),
+  purple: new Howl(getSoundOptions(sound4)),
+  magenta: new Howl(getSoundOptions(sound5)),
+  pink: new Howl(getSoundOptions(sound6)),
+  lime: new Howl(getSoundOptions(sound7)),
+  orange: new Howl(getSoundOptions(sound8)),
+  black: new Howl(getSoundOptions(sound9)),
+};
+
 type GameReducer<T = undefined> = (
   state: GameState,
   action?: { type: string; payload: T }
@@ -75,6 +110,10 @@ const decreaseTimeBetweenShowInState = (state: GameState) => {
   state.timeBetweenShow = state.timeBetweenShow - state.timeBetweenShow * 0.05;
 };
 
+const getMainComponent = () => {
+  return document.querySelector("#main");
+};
+
 const reducers: Record<string, GameReducer<any>> = {
   startGame: (state) => {
     state.isStarted = true;
@@ -97,6 +136,7 @@ const reducers: Record<string, GameReducer<any>> = {
       JSON.stringify(correctColorSlice) ===
       JSON.stringify(state.userInputColors)
     ) {
+      sounds[action.payload].play();
       if (state.colors.length === state.userInputColors.length) {
         addColorToState(state);
         if (state.colors.length % 5 === 0) {
@@ -106,6 +146,15 @@ const reducers: Record<string, GameReducer<any>> = {
         state.userInputColors = [];
       }
     } else {
+      hitSound.play();
+      const main = getMainComponent();
+      if (main) {
+        main?.classList.toggle("hurt");
+        setTimeout(() => {
+          main?.classList.toggle("hurt");
+        }, 200);
+      }
+      addColorToState(state);
       decreaseLiveInState(state);
     }
   }) as GameReducer<ColorName>,

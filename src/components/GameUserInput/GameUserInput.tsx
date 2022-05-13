@@ -19,6 +19,7 @@ const GameUserInput = () => {
     () =>
       userInput.map((colorName, index) => (
         <ColorPlate
+          key={index}
           style={{
             backgroundColor: colors[colorName],
             marginRight: index !== userInput.length - 1 ? "4px" : undefined,

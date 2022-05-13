@@ -11,3 +11,9 @@ ul,
 ol {
   list-style-position: inside;
 }
+
+.hurt {
+  -webkit-box-shadow: 0px 0px 100px 10px rgba(238, 7, 7, 0.2) inset;
+  -moz-box-shadow: 0px 0px 100px 10px rgba(238, 7, 7, 0.2) inset;
+  box-shadow: 0px 0px 100px 10px rgba(238, 7, 7, 0.2) inset;
+}
