@@ -51,20 +51,24 @@ const GameButtons = () => {
     );
   }, [isShowing]);
 
-  return buttons.map((btn) => {
-    return (
-      <ColorButton
-        style={{
-          backgroundColor: isShowing ? "#ccc" : btn.backgroundColor,
-        }}
-        disabled={isShowing}
-        onClick={btn.onClickHandler}
-        key={btn.color}
-      >
-        {btn.color.toUpperCase()}
-      </ColorButton>
-    );
-  });
+  return (
+    <>
+      {buttons.map((btn) => {
+        return (
+          <ColorButton
+            style={{
+              backgroundColor: isShowing ? "#ccc" : btn.backgroundColor,
+            }}
+            disabled={isShowing}
+            onClick={btn.onClickHandler}
+            key={btn.color}
+          >
+            {btn.color.toUpperCase()}
+          </ColorButton>
+        );
+      })}
+    </>
+  );
 };
 
 export default GameButtons;
