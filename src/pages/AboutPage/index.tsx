@@ -43,10 +43,14 @@ const Links = () => {
       >
         <ul>
           <li style={{ marginBottom: "4px" }}>
-            <a href="/">GitHub</a>
+            <a href="/" style={{ color: "#005bff" }}>
+              GitHub
+            </a>
           </li>
           <li style={{ marginBottom: "4px" }}>
-            <a href="https://t.me/bruhabruh4">Creator's telegram</a>
+            <a href="https://t.me/bruhabruh4" style={{ color: "#005bff" }}>
+              Creator's telegram
+            </a>
           </li>
         </ul>
       </Typography>
