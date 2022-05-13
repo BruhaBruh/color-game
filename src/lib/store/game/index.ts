@@ -154,7 +154,6 @@ const reducers: Record<string, GameReducer<any>> = {
           main?.classList.toggle("hurt");
         }, 200);
       }
-      addColorToState(state);
       decreaseLiveInState(state);
     }
   }) as GameReducer<ColorName>,
