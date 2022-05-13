@@ -43,7 +43,10 @@ const Links = () => {
       >
         <ul>
           <li style={{ marginBottom: "4px" }}>
-            <a href="/" style={{ color: "#005bff" }}>
+            <a
+              href="https://github.com/BruhaBruh/color-game"
+              style={{ color: "#005bff" }}
+            >
               GitHub
             </a>
           </li>

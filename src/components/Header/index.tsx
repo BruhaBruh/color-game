@@ -53,7 +53,7 @@ const Header: React.FC = () => {
               <NavLink>About</NavLink>
             </Typography>
           </Link>
-          <Link to="/" style={{ textDecoration: "none" }}>
+          <Link to="https://github.com/BruhaBruh/color-game" style={{ textDecoration: "none" }}>
             <Typography variant="h2">
               <NavLink>GitHub</NavLink>
             </Typography>
