@@ -24,7 +24,7 @@ const Game = () => {
       <GameSection
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(128px, 1fr))",
+          gridTemplateColumns: "repeat(auto-fill, minmax(90px, 1fr))",
           gap: "8px",
         }}
       >

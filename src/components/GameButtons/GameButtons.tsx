@@ -17,6 +17,7 @@ const ColorButton = styled.button`
   cursor: pointer;
   aspect-ratio: 1 / 1;
   user-select: none;
+  overflow: hidden;
 `;
 
 const GameButtons = () => {

@@ -40,7 +40,7 @@ const Header: React.FC = () => {
         }}
       >
         <Link to="/" style={{ textDecoration: "none" }}>
-          <Typography variant="h1">
+          <Typography variant="h2">
             <Logo>Color Game</Logo>
           </Typography>
         </Link>
@@ -53,7 +53,10 @@ const Header: React.FC = () => {
               <NavLink>About</NavLink>
             </Typography>
           </Link>
-          <Link to="https://github.com/BruhaBruh/color-game" style={{ textDecoration: "none" }}>
+          <Link
+            to="https://github.com/BruhaBruh/color-game"
+            style={{ textDecoration: "none" }}
+          >
             <Typography variant="h2">
               <NavLink>GitHub</NavLink>
             </Typography>

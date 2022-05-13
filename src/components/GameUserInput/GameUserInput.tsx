@@ -22,7 +22,7 @@ const GameUserInput = () => {
           key={index}
           style={{
             backgroundColor: colors[colorName],
-            marginRight: index !== userInput.length - 1 ? "4px" : undefined,
+            margin: "2px",
           }}
         />
       )),
@@ -33,6 +33,7 @@ const GameUserInput = () => {
     <div
       style={{
         display: "flex",
+        flexWrap: "wrap",
         justifyContent: "center",
         alignItems: "center",
       }}
